@@ -1,0 +1,66 @@
+#!/bin/bash
+ARGS=1
+E_BADARGS=65
+TEM_FILE="/tmp/zh_dict.tmp"
+ 
+if [ $# -lt "$ARGS" ]
+ then
+    echo "Usage:`basename $0` [word]"
+    exit $E_BADARGS
+fi
+
+word=$1
+
+# 抓取页面，删除html代码，空行等，只留下想要的内容
+curl -s 'http://dict.youdao.com/w/'$word'/#keyfrom=dict2.top' | awk 'BEGIN{j=0;i=0;} {if(/authTransToggle/){i++;} if(i>=1){print $0; if(/<\/ul>/){i=0;}} if(/更多双语例句/){ j++;} if(j==1) {print $0; if(/<\/ul>/){j=0;}}}' |sed 's/<[^>]*>//g' | sed 's/&nbsp;//g'| sed 's/&rarr;//g' | sed 's/^\s*//g' | sed '/^$/d'> $TEM_FILE
+ 
+# 处理输出
+is_head=true # 当前行是否属于“头部”
+
+is_enter=true
+
+is_header=false
+
+head="" # 头部内容
+body="" # 主体内容
+ln_item=0 # 每一条解释的行号
+ln_eg=0 # 例句行号
+
+
+while read line
+do
+    if $is_head ; then 						#Format headers
+    	if [ "${line: -1}x" == "句x" ] ;then
+        	is_head=false
+        	ln_eg=0
+        	count=1
+        	head="$head\n"
+        elif [ "${line:0:1}x" == "（x" ] ;then
+        	let co++
+        	head="$head\n$co. $line"
+        elif [ "${line:0:1}x" == "[x" ] ;then
+        	head="$head\n$line\n"
+        elif [ "$word" == "$line" ] ;then
+        	co=0 							#count of words
+        	head="$line"
+        else
+        	head="$head $line"
+        fi
+    else
+		if [ $ln_eg == 0 ] ; then
+            line="\n$count. $line" # 英文
+            ln_eg=1
+        elif [ $ln_eg == 1 ]; then
+			let count++
+            line="$line\n" # 中文
+            ln_eg=2
+        elif [ $ln_eg == 2 ]; then
+           line="" # 出处 
+            ln_eg=0
+        fi
+        body="$body $line"
+    fi
+done < $TEM_FILE
+echo -e "$head\n例句：\n$body"
+ 
+exit 0
