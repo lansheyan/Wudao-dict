@@ -1,10 +1,17 @@
 import socket
+import time
 
 
 class WudaoClient:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client.connect(("0.0.0.0", 2376))
+        # waiting for server init
+        while True:
+            try:
+                self.client.connect(("0.0.0.0", 2376))
+                break
+            except ConnectionRefusedError:
+                time.sleep(0.2)
 
     def get_word_info(self, word):
         word = word.lower()

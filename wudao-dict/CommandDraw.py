@@ -16,7 +16,7 @@ class CommandDraw:
             print(u'英 ' + self.PEP_PATTERN % word['pronunciation']['英'], end='  ')
             print(u'美 ' + self.PEP_PATTERN % word['pronunciation']['美'])
         except KeyError:
-            print(u'英 ' + self.PEP_PATTERN % word['pronunciation'][''])
+            print(u'英/美 ' + self.PEP_PATTERN % word['pronunciation'][''])
         # paraphrase
         for v in word['paraphrase']:
             print(self.BLUE_PATTERN % v)

@@ -1,6 +1,7 @@
 from JsonReader import JsonReader
 
 import socket
+import sys
 
 
 class WudaoServer:
@@ -27,7 +28,8 @@ class WudaoServer:
             # Shutdown
             if word == '---shutdown keyword---':
                 self.server.close()
-                exit(0)
+                print('Bye!')
+                sys.exit(0)
             # Get word
             try:
                 word_info = self.json_reader.get_word_info(word)
@@ -44,3 +46,4 @@ class WudaoServer:
 if __name__ == '__main__':
     ws = WudaoServer()
     ws.run()
+

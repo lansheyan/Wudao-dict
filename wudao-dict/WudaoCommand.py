@@ -2,9 +2,9 @@ from WudaoClient import WudaoClient
 from CommandDraw import CommandDraw
 from UserHistory import UserHistory
 
-import sys
-import socket
 import json
+import sys
+import os
 
 
 class WudaoCommand:
@@ -36,12 +36,16 @@ class WudaoCommand:
         if len(self.param_list) == 0:
             return
         if 'h' in self.param_list or '-help' in self.param_list:
+            print('Usage: wdd [OPTION]... [WORD]')
             print('Youdao is wudao, An powerful dict.')
+            print('-k, --kill                   kill the server process')
+            print('-h, --help                   display this help and exit')
+            print('-s, --short-desc             show description without the sentence')
             exit(0)
-        if 'k' in self.param_list:
+        if 'k' in self.param_list or '-kill' in self.param_list:
             self.client.close()
-            exit(0)
-        if 's' in self.param_list:
+            sys.exit(0)
+        if 's' in self.param_list or '-short-desc' in self.param_list:
             self.draw_conf = False
 
     def query(self):
