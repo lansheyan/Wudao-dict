@@ -11,7 +11,7 @@ with open('./dict/%s.txt' % NAME, 'r') as f:
 f = open('./dict/%s.json' % NAME, 'w+')
 fin = open('./dict/%s.index' % NAME, 'w+')
 for v in word_map:
-    fin.write(v + ' ' + str(f.tell()) + '\n')
+    fin.write(v + ':::' + str(f.tell()) + '\n')
     f.write(v + ':::' + json.dumps(word_map[v]) + '\n')
 f.close()
 fin.close()

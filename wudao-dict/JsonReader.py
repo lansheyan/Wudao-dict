@@ -9,7 +9,7 @@ class JsonReader:
         self.__index_dict = {}
         with open(self.INDEX_FILE_NAME, 'r') as f:
             for v in f.readlines():
-                v = v.strip().split()
+                v = v.strip().split(':::')
                 self.__index_dict[v[0]] = int(v[1])
 
     # return strings of word info
