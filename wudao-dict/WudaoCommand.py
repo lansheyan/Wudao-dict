@@ -72,7 +72,7 @@ class WudaoCommand:
                     self.painter.draw_text(word_info, self.draw_conf)
                 except ImportError:
                     print('You need install bs4 first.')
-                    print('Use \'pip3 install bs4\` or get bs4 online.')
+                    print('Use \'pip3 install bs4\' or get bs4 online.')
                 except URLError:
                     print('No Internet : Please check your connection first')
             else:
