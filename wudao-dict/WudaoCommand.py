@@ -62,7 +62,7 @@ class WudaoCommand:
             # Online search
             if 'o' in self.param_list or '-online-search' in self.param_list:
                 try:
-                    from lib.WudaoOnline import get_text
+                    from src.WudaoOnline import get_text
                     from urllib.error import URLError
                     word_info = get_text(self.word)
                     if not word_info['paraphrase']:
