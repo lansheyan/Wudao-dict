@@ -1,10 +1,10 @@
-from WudaoClient import WudaoClient
-from CommandDraw import CommandDraw
-from UserHistory import UserHistory
-
 import json
 import sys
-import os
+
+
+from lib.CommandDraw import CommandDraw
+from lib.UserHistory import UserHistory
+from lib.WudaoClient import WudaoClient
 
 
 class WudaoCommand:
@@ -29,7 +29,7 @@ class WudaoCommand:
                 if v.startswith('-'):
                     self.param_list.append(v[1:])
                 else:
-                    self.word += v
+                    self.word += ' ' + v
         self.word = self.word.strip()
 
     def param_parse(self):
@@ -41,21 +41,43 @@ class WudaoCommand:
             print('-k, --kill                   kill the server process')
             print('-h, --help                   display this help and exit')
             print('-s, --short-desc             show description without the sentence')
+            print('-o, --online-search          search word online')
             exit(0)
+        # close server
         if 'k' in self.param_list or '-kill' in self.param_list:
             self.client.close()
             sys.exit(0)
+        # short conf
         if 's' in self.param_list or '-short-desc' in self.param_list:
             self.draw_conf = False
 
     def query(self):
+        # query on server
         server_context = self.client.get_word_info(self.word).strip()
         if server_context != 'None':
             wi = json.loads(server_context)
             self.history_manager.add_item(self.word)
             self.painter.draw_text(wi, self.draw_conf)
         else:
-            print('Error: no such word')
+            # Online search
+            if 'o' in self.param_list or '-online-search' in self.param_list:
+                try:
+                    from lib.WudaoOnline import get_text
+                    from urllib.error import URLError
+                    word_info = get_text(self.word)
+                    if not word_info['paraphrase']:
+                        print('No such word: %s found online' % self.word)
+                        exit(0)
+                    self.history_manager.add_item(self.word)
+                    self.painter.draw_text(word_info, self.draw_conf)
+                except ImportError:
+                    print('You need install bs4 first.')
+                    print('Use \'pip3 install bs4\` or get bs4 online.')
+                except URLError:
+                    print('No Internet : Please check your connection first')
+            else:
+                print('Error: no such word :' + self.word)
+                print('You can use -o to search online.')
 
 
 def main():

@@ -1,7 +1,7 @@
-from JsonReader import JsonReader
-
 import socket
 import sys
+
+from lib.JsonReader import JsonReader
 
 
 class WudaoServer:
@@ -12,7 +12,7 @@ class WudaoServer:
         # Singleton
         try:
             self.server.bind(("0.0.0.0", 2376))
-        except OSError:
+        except OSError as e:
             print('OSError: Port has been used.')
             exit(0)
         self.server.listen()
@@ -28,7 +28,7 @@ class WudaoServer:
             # Shutdown
             if word == '---shutdown keyword---':
                 self.server.close()
-                print('Bye!')
+                print('Bye!~~~')
                 sys.exit(0)
             # Get word
             try:

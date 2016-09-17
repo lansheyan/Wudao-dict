@@ -1,8 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # usr ignore
-.txt
-.log
+*.txt
+*.log
+.idea/
+dict.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -94,6 +96,5 @@ ENV/
 # Rope project settings
 .ropeproject
 
-.idea/workspace.xml
-soup/
-wudao-dict/dict/dict.txt
+/wudao-dict/dict/dict.json
+/wudao-dict/.idea/
