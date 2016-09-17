@@ -2,9 +2,7 @@
 ### Python template
 # usr ignore
 *.txt
-*.log
 .idea/
-dict.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -98,4 +96,4 @@ ENV/
 
 /wudao-dict/dict/dict.json
 /wudao-dict/.idea/
-/wudao-dict/usr/usr_word.json
+/wudao-dict/usr/

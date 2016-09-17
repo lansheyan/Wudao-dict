@@ -1,7 +1,7 @@
 import socket
 import sys
 
-from lib.JsonReader import JsonReader
+from src.JsonReader import JsonReader
 
 
 class WudaoServer:

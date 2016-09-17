@@ -2,9 +2,9 @@ import json
 import sys
 
 
-from lib.CommandDraw import CommandDraw
-from lib.UserHistory import UserHistory
-from lib.WudaoClient import WudaoClient
+from src.CommandDraw import CommandDraw
+from src.UserHistory import UserHistory
+from src.WudaoClient import WudaoClient
 
 
 class WudaoCommand:
