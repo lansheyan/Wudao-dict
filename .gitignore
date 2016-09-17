@@ -98,3 +98,4 @@ ENV/
 
 /wudao-dict/dict/dict.json
 /wudao-dict/.idea/
+/wudao-dict/usr/usr_word.json
