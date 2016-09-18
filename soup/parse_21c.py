@@ -71,18 +71,7 @@ def get_text(word):
     #
     #  <--  BASIC DESCRIPTION
     #
-    nodes = ss(root, "#phrsListTab .trans-container ul")
-    basic_desc = []
-
-    if len(nodes) != 0:
-        ul = nodes[0]
-        for li in ul.children:
-            if not (isinstance(li, bs4.Tag) and li.name.lower() == "li"):
-                continue
-            basic_desc.append(li.text.strip())
-    word_struct["paraphrase"] = basic_desc
-    
-    if not word_struct["paraphrase"]:
+    if pron_fallback:
         d = root.select(".wordGroup.def")
         p = root.select(".wordGroup.pos")
         ds = ""
@@ -92,6 +81,17 @@ def get_text(word):
         if len(p) > 0:
             dp = p[0].text.strip()
         word_struct["paraphrase"] = (dp + " " + ds).strip()
+    else:
+        nodes = ss(root, "#phrsListTab .trans-container ul")
+        basic_desc = []
+
+        if len(nodes) != 0:
+            ul = nodes[0]
+            for li in ul.children:
+                if not (isinstance(li, bs4.Tag) and li.name.lower() == "li"):
+                    continue
+                basic_desc.append(li.text.strip())
+        word_struct["paraphrase"] = basic_desc
     #
     #  -->
     #
@@ -177,30 +177,28 @@ if __name__ == "__main__":
     f_index = open('ph_list.txt',"r")
     tot_list = []
     count = 0
-    aco = 0
     lines = f_index.readlines()
 
     for l in lines:
-        aco += 1
+        count += 1
         sys.stdout.flush()
         try:
             ll = get_text(l.strip())
         except SyntaxError as err:
         
             time.sleep(0.5)
-            print('Getting %d / %d HA_ERR: %s' % (aco,len(lines), l.strip()))
+            print('Getting %d / %d HA_ERR: %s' % (count,len(lines), l.strip()))
             raise err
             #continue
         if not ll["paraphrase"]:
             time.sleep(0.5)
-            print('Getting %d / %d STR_ERR: %s' % (aco,len(lines), l.strip()))
+            print('Getting %d / %d STR_ERR: %s' % (count,len(lines), l.strip()))
             
             continue
-        print('Getting %d / %d: %s' % (aco,len(lines), l.strip()))
+        print('Getting %d / %d: %s' % (count,len(lines), l.strip()))
         tot_list.append(ll)
         time.sleep(0.5)
-        count += 1
-        if count % 200 == 0:
+        if count % 1000 == 0:
             fw = open('new_data.txt', 'w+')
             json.dump(tot_list, fw)
             fw.close()
