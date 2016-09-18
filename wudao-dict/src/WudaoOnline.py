@@ -2,9 +2,11 @@ import bs4
 from .soupselect import select as ss
 from urllib.request import urlopen
 from urllib.parse import urlparse
+from urllib.parse import quote
 
 
 def get_html(x):
+    x = quote(x)
     url = urlparse('http://dict.youdao.com/search?q=%s' % x)
     res = urlopen(url.geturl())
     xml = res.read().decode('utf-8')
@@ -25,7 +27,7 @@ def multi_space_to_single(text):
     return result
 
 
-#get word info online
+# get word info online
 def get_text(word):
     content = get_html(word)
     word_struct = {"word": word}
