@@ -8,6 +8,7 @@ class UserHistory:
     latest_word = []
     DICT_FILE_NAME = './usr/usr_word.json'
     LATEST_FILE_NAME = './usr/latest.txt'
+    ONLINE_CACHE = './usr/online_cache.json'
 
     def __init__(self):
         # Create empty file
@@ -17,6 +18,9 @@ class UserHistory:
                 json.dump(tmp_dict, f)
         if not os.path.exists(self.LATEST_FILE_NAME):
             open(self.LATEST_FILE_NAME, 'w+').close()
+        if not os.path.exists(self.ONLINE_CACHE):
+            with open(self.ONLINE_CACHE, 'w+') as f:
+                json.dump([], f)
 
     def add_item(self, word):
         # Update word dict
@@ -38,5 +42,26 @@ class UserHistory:
             for v in self.latest_word:
                 f.write(v + '\n')
         with open(self.DICT_FILE_NAME, 'w') as f:
-            json.dump(self.content, f, indent=4)
+            # TODO :to many words i/o
+            if len(self.content) <= 1000:
+                json.dump(self.content, f, indent=4)
+
+    # add word info to online cache
+    def add_word_info(self, word_info):
+        with open(self.ONLINE_CACHE, 'r') as f:
+            now_list = json.load(f)
+        # TODO :too much usr word
+        with open(self.ONLINE_CACHE, 'w') as f:
+            now_list.append(word_info)
+            json.dump(now_list, f)
+
+    # get word info from online cache
+    def get_word_info(self, word):
+        with open(self.ONLINE_CACHE, 'r') as f:
+            now_list = json.load(f)
+        for v in now_list:
+            if word == v['word']:
+                return v
+        return None
+
 

@@ -15,12 +15,12 @@ class WudaoCommand:
         self.draw_conf = True
         # Init
         self.param_separate()
-        # self.word = 'ass'
         self.painter = CommandDraw()
         self.history_manager = UserHistory()
         # client
         self.client = WudaoClient()
 
+    # init parameters
     def param_separate(self):
         if len(sys.argv) == 1:
             self.param_list.append('h')
@@ -32,6 +32,7 @@ class WudaoCommand:
                     self.word += ' ' + v
         self.word = self.word.strip()
 
+    # process parameters
     def param_parse(self):
         if len(self.param_list) == 0:
             return
@@ -51,6 +52,7 @@ class WudaoCommand:
         if 's' in self.param_list or '-short-desc' in self.param_list:
             self.draw_conf = False
 
+    # query word
     def query(self):
         # query on server
         server_context = self.client.get_word_info(self.word).strip()
@@ -69,6 +71,7 @@ class WudaoCommand:
                         print('No such word: %s found online' % self.word)
                         exit(0)
                     self.history_manager.add_item(self.word)
+                    self.history_manager.add_word_info(word_info)
                     self.painter.draw_text(word_info, self.draw_conf)
                 except ImportError:
                     print('You need install bs4 first.')
@@ -76,8 +79,14 @@ class WudaoCommand:
                 except URLError:
                     print('No Internet : Please check your connection first')
             else:
-                print('Error: no such word :' + self.word)
-                print('You can use -o to search online.')
+                # search in online cache first
+                word_info = self.history_manager.get_word_info(self.word)
+                if word_info:
+                    self.history_manager.add_item(self.word)
+                    self.painter.draw_text(word_info, self.draw_conf)
+                else:
+                    print('Error: no such word :' + self.word)
+                    print('You can use -o to search online.')
 
 
 def main():
