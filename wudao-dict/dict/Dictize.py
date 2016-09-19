@@ -1,9 +1,9 @@
 import json
 
-NAME = 'dict'
+NAME = 'zh_dict'
 
 word_map = {}
-with open('merge.txt', 'r') as f:
+with open('bajiushi.txt', 'r') as f:
     list = json.load(f)
     for v in list:
         word_map[v['word']] = v

@@ -59,4 +59,33 @@ class CommandDraw:
                     print(self.BROWN_PATTERN % v[1])
                     count += 1
 
-
+    def draw_zh_text(self, word, conf):
+        # Word
+        print(self.RED_PATTERN % word['word'])
+        # pronunciation
+        if word['pronunciation']:
+            print(self.PEP_PATTERN % word['pronunciation'])
+        # paraphrase
+        for v in word['paraphrase']:
+            print(self.BLUE_PATTERN % v)
+        # complex
+        if conf:
+            count = 1
+            if word["desc"]:
+                for v in word['desc']:
+                    print(str(count) + '. ', end='')
+                    print(self.GREEN_PATTERN % v[0])
+                    sub_count = 0
+                    for e in v[1]:
+                        if sub_count % 2 == 0:
+                            print(self.BROWN_PATTERN % e, end='')
+                        else:
+                            print(e)
+                        sub_count += 1
+                    count += 1
+            if word['sentence']:
+                count = 1
+                print('例句:')
+                for v in word['sentence']:
+                    print(str(count) + '. ' + self.BROWN_PATTERN % v[0] + v[1])
+                    count += 1
