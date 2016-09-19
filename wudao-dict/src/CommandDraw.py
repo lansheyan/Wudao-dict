@@ -40,7 +40,9 @@ class CommandDraw:
                 return
             for v in word['sentence']:
                 if collins_flag:
-                    # collins dcit
+                    # collins dict
+                    if len(v) != 3:
+                        continue
                     if v[1] == '' or len(v[2]) == 0:
                         continue
                     if v[1].startswith('['):
@@ -54,6 +56,8 @@ class CommandDraw:
                     print('')
                 else:
                     # 21 new year dict
+                    if len(v) != 2:
+                        continue
                     print(str(count) + '. ' + self.GREEN_PATTERN % '[例]', end=' ')
                     print(v[0], end='  ')
                     print(self.BROWN_PATTERN % v[1])
@@ -66,26 +70,40 @@ class CommandDraw:
         if word['pronunciation']:
             print(self.PEP_PATTERN % word['pronunciation'])
         # paraphrase
-        for v in word['paraphrase']:
-            print(self.BLUE_PATTERN % v)
+        if word['paraphrase']:
+            for v in word['paraphrase']:
+                v = v.replace('  ;  ', ', ')
+                print(self.BLUE_PATTERN % v)
         # complex
         if conf:
+            # description
             count = 1
             if word["desc"]:
+                print('')
                 for v in word['desc']:
+                    if not v:
+                        continue
+                    # sub title
                     print(str(count) + '. ', end='')
+                    v[0] = v[0].replace(';', ',')
                     print(self.GREEN_PATTERN % v[0])
+                    # sub example
                     sub_count = 0
-                    for e in v[1]:
-                        if sub_count % 2 == 0:
-                            print(self.BROWN_PATTERN % e, end='')
-                        else:
-                            print(e)
-                        sub_count += 1
+                    if len(v) == 2:
+                        for e in v[1]:
+                            if sub_count % 2 == 0:
+                                e = e.strip().replace(';', '')
+                                print(self.BROWN_PATTERN % ('    ' + e + '    '), end='')
+                            else:
+                                print(e)
+                            sub_count += 1
                     count += 1
+            # example
             if word['sentence']:
                 count = 1
-                print('例句:')
+                print(self.RED_PATTERN % '\n例句:')
                 for v in word['sentence']:
-                    print(str(count) + '. ' + self.BROWN_PATTERN % v[0] + v[1])
+                    if len(v) == 2:
+                        print('')
+                        print(str(count) + '. ' + self.BROWN_PATTERN % v[0] + '    '+ v[1])
                     count += 1

@@ -153,3 +153,60 @@ def get_text(word):
                 word_struct["sentence"].append(ll)
     #  -->
     return word_struct
+
+
+def get_zh_text(word):
+    content = get_html(word)
+    word_struct = {"word": word}
+    root = bs4.BeautifulSoup(content, "lxml")
+
+    # pronunciation
+    pron = ''
+    for item in ss(root, ".phonetic"):
+        if item.name.lower() == "span":
+            pron = item.text
+            break
+
+    word_struct["pronunciation"] = pron
+
+    #  <--  BASIC DESCRIPTION
+    nodes = ss(root, "#phrsListTab .trans-container ul p")
+    basic_desc = []
+
+    if len(nodes) != 0:
+        for li in nodes:
+            basic_desc.append(li.text.strip().replace('\n', ' '))
+    word_struct["paraphrase"] = basic_desc
+
+    # DESC
+    desc = []
+    for child in ss(root, '#authDictTrans ul li ul li'):
+        single = []
+        sp = ss(child, 'span')
+        if sp:
+            span = sp[0].text.strip().replace(':', '')
+            if span:
+                single.append(span)
+        ps = []
+        for p in ss(child, 'p'):
+            ps.append(p.text.strip())
+        if ps:
+            single.append(ps)
+        desc.append(single)
+
+    word_struct["desc"] = desc
+
+    #  <-- VERY COMPLEX
+    word_struct["sentence"] = []
+    # 21 new year
+    for v in root.select("#bilingual ul li"):
+        p = ss(v, "p")
+        ll = []
+        for p in ss(v, "p"):
+            if len(p) == 0:
+                continue
+            if 'class' not in p.attrs:
+                ll.append(p.text.strip())
+        if len(ll) != 0:
+            word_struct["sentence"].append(ll)
+    return word_struct

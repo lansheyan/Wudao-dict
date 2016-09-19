@@ -97,3 +97,4 @@ ENV/
 /wudao-dict/dict/dict.json
 /wudao-dict/.idea/
 /wudao-dict/usr/
+/wudao-dict/test.in
