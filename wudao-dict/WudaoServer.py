@@ -33,10 +33,12 @@ class WudaoServer:
                 sys.exit(0)
             # Get word
             try:
-                if is_alphabet(word[0]):
-                    word_info = self.json_reader.get_word_info(word)
-                else:
-                    word_info = self.json_reader.get_zh_word_info(word)
+                word_info = None
+                if word:
+                    if is_alphabet(word[0]):
+                        word_info = self.json_reader.get_word_info(word)
+                    else:
+                        word_info = self.json_reader.get_zh_word_info(word)
                 if word_info is not None:
                     conn.sendall(word_info.encode('utf-8'))
                     print('Send: ' + str(len(word_info)) + ' bytes ')

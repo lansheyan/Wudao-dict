@@ -33,15 +33,16 @@ class WudaoCommand:
                 else:
                     self.word += ' ' + v
         self.word = self.word.strip()
-        if not is_alphabet(self.word[0]):
-            self.is_zh = True
+        if self.word:
+            if not is_alphabet(self.word[0]):
+                self.is_zh = True
 
     # process parameters
     def param_parse(self):
         if len(self.param_list) == 0:
             return
         if 'h' in self.param_list or '-help' in self.param_list:
-            print('Usage: wdd [OPTION]... [WORD]')
+            print('Usage: wd [OPTION]... [WORD]')
             print('Youdao is wudao, An powerful dict.')
             print('-k, --kill                   kill the server process')
             print('-h, --help                   display this help and exit')
@@ -55,6 +56,9 @@ class WudaoCommand:
         # short conf
         if 's' in self.param_list or '-short-desc' in self.param_list:
             self.draw_conf = False
+        if not self.word:
+            print('Usage: wdd [OPTION]... [WORD]')
+            exit(0)
 
     # query word
     def query(self):
