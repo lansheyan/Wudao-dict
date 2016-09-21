@@ -3,7 +3,7 @@ import json
 NAME = 'zh_dict'
 
 word_map = {}
-with open('bajiushi.txt', 'r') as f:
+with open('zh_dict.txt', 'r') as f:
     list = json.load(f)
     for v in list:
         word_map[v['word']] = v
