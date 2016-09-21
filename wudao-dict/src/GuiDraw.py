@@ -8,6 +8,7 @@ class GuiDraw:
     BROWN_PATTERN = '<span style=\" font-size:12pt; font-weight:400; color:#cc692e;\" > %s </span>'
     WHITE_PATTERN = '<span style=\" font-size:12pt; font-weight:400; color:#c9f9ff;\" > %s </span>'
     SPACE_PATTERN = '&nbsp;&nbsp;&nbsp;&nbsp;'
+    P_W_PATTERN = '<p><span style=\" font-size:12pt; font-weight:400; color:#FF0c32;\" > %s </span></p>'
     html = ''
 
     def draw_text(self, word, conf):
@@ -17,10 +18,10 @@ class GuiDraw:
         if word['pronunciation']:
             uncommit = ''
             try:
-                uncommit += u'英 ' + self.PEP_PATTERN % word['pronunciation']['英'] + self.SPACE_PATTERN
-                uncommit += u'美 ' + self.PEP_PATTERN % word['pronunciation']['美']
+                uncommit += self.WHITE_PATTERN % u'英 ' + self.PEP_PATTERN % word['pronunciation']['英'] + self.SPACE_PATTERN
+                uncommit += self.WHITE_PATTERN % u'美 ' + self.PEP_PATTERN % word['pronunciation']['美']
             except KeyError:
-                uncommit = u'英/美 ' + self.PEP_PATTERN % word['pronunciation']['']
+                uncommit = self.WHITE_PATTERN % u'英/美 ' + self.PEP_PATTERN % word['pronunciation']['']
             finally:
                 self.html += self.P_PATTERN % uncommit
         # paraphrase
@@ -51,12 +52,14 @@ class GuiDraw:
                         continue
                     self.html += '<p>'
                     if v[1].startswith('['):
-                        self.html += (str(count) + '.&nbsp;' + self.GREEN_PATTERN % (v[1]))
+                        self.html += (self.WHITE_PATTERN % (str(count) + '.&nbsp;')
+                                      + self.GREEN_PATTERN % (v[1]))
                     else:
-                        self.html += (str(count) + '.&nbsp;' + self.GREEN_PATTERN % ('[' + v[1] + ']'))
-                    self.html += v[0] + '</p>'
+                        self.html += (self.WHITE_PATTERN % (str(count) + '.&nbsp;')
+                                      + self.GREEN_PATTERN % ('[' + v[1] + ']'))
+                    self.html += self.WHITE_PATTERN % v[0] + '</p>'
                     for sv in v[2]:
-                        self.html += self.P_PATTERN % (self.GREEN_PATTERN % u'  例: ' +
+                        self.html += self.P_PATTERN % (self.GREEN_PATTERN % u'&nbsp;&nbsp;例: ' +
                                                        self.BROWN_PATTERN % (sv[0] + sv[1]))
                     count += 1
                     self.html += self.P_PATTERN % ''
@@ -64,8 +67,9 @@ class GuiDraw:
                     # 21 new year dict
                     if len(v) != 2:
                         continue
-                    self.html += '<p>' + (str(count) + '.&nbsp;' + self.GREEN_PATTERN % '[例]')
-                    self.html += v[0] + '</p>'
+                    self.html += '<p>' + (self.WHITE_PATTERN % (str(count) + '.&nbsp;')
+                                          + self.GREEN_PATTERN % '[例]')
+                    self.html += self.WHITE_PATTERN % v[0] + '</p>'
                     self.html += self.P_PATTERN % (self.BROWN_PATTERN % v[1])
                     count += 1
 

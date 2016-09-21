@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -33,6 +33,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.ol_cb = QtWidgets.QCheckBox(self.centralwidget)
+        self.ol_cb.setChecked(True)
         self.ol_cb.setObjectName("ol_cb")
         self.horizontalLayout.addWidget(self.ol_cb)
         self.intro_rb = QtWidgets.QRadioButton(self.centralwidget)
