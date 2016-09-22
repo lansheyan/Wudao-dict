@@ -37,7 +37,7 @@
     $ sudo sh setup.sh
     ```
 
-看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
+    看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
 
 3. **解压**`./wudao-dict/wudao-dict/dict/dict.zip`在`./wudao-dict/wudao-dict/dict/`下开始使用。
 
