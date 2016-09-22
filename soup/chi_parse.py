@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 import urllib
 import sys
 import json
-import os
+
 
 def get_html(x):
     url = urlparse('http://dict.youdao.com/search?q=%s' % urllib.parse.quote(x))
