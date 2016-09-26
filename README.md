@@ -23,6 +23,8 @@
 
 ## 安装说明
 
+遇到任何问题请联系作者。 QQ:1085912251  邮箱:chestnutheng@hotmail.com
+
 ### Linux
 
 1. 安装环境: 需要python3和bs4 (在线搜索用)
