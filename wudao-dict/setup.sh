@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir usr
+chmod -R 777 usr
 echo '#!/bin/bash'>./wd
 echo 'save_path=$PWD'>>./wd
 echo 'cd '$PWD >>./wd
