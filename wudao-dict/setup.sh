@@ -1,6 +1,10 @@
 #!/bin/bash
 mkdir usr
 chmod -R 777 usr
+
+echo 'Unziping...'
+unzip ./dict/dict.zip -d ./dict/
+
 echo '#!/bin/bash'>./wd
 echo 'save_path=$PWD'>>./wd
 echo 'cd '$PWD >>./wd
