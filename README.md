@@ -38,7 +38,7 @@ QQ: 1085912251
 
 2. 运行
     ```
-    $ git clone https://github.com/ChestnutHeng/Wudao-dict/
+    $ git clone --depth=1 https://github.com/chestnutheng/wudao-dict
     $ cd ./wudao-dict/wudao-dict
     $ sudo sh setup.sh
     ```
