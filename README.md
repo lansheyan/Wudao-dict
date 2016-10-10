@@ -37,8 +37,9 @@ QQ: 1085912251
     ```
 
 2. 运行
+    下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip (推荐)
+    或`$ git clone --depth=1 https://github.com/chestnutheng/wudao-dict` (不推荐)
     ```
-    $ git clone --depth=1 https://github.com/chestnutheng/wudao-dict
     $ cd ./wudao-dict/wudao-dict
     $ sudo sh setup.sh
     ```
