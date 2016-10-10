@@ -12,13 +12,13 @@ class CommandDraw:
         # pronunciation
         if word['pronunciation']:
             uncommit = ''
-            try:
+            if '英' in word['pronunciation']:
                 uncommit += u'英 ' + self.PEP_PATTERN % word['pronunciation']['英'] + '  '
+            if '美' in word['pronunciation']:
                 uncommit += u'美 ' + self.PEP_PATTERN % word['pronunciation']['美']
-            except KeyError:
+            if '' in word['pronunciation']:
                 uncommit = u'英/美 ' + self.PEP_PATTERN % word['pronunciation']['']
-            finally:
-                print(uncommit)
+            print(uncommit)
         # paraphrase
         for v in word['paraphrase']:
             print(self.BLUE_PATTERN % v)
