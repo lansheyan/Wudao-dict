@@ -17,13 +17,13 @@ class GuiDraw:
         # pronunciation
         if word['pronunciation']:
             uncommit = ''
-            try:
+            if '英' in word['pronunciation']:
                 uncommit += self.WHITE_PATTERN % u'英 ' + self.PEP_PATTERN % word['pronunciation']['英'] + self.SPACE_PATTERN
+            if '美' in word['pronunciation']:
                 uncommit += self.WHITE_PATTERN % u'美 ' + self.PEP_PATTERN % word['pronunciation']['美']
-            except KeyError:
+            if '' in word['pronunciation']:
                 uncommit = self.WHITE_PATTERN % u'英/美 ' + self.PEP_PATTERN % word['pronunciation']['']
-            finally:
-                self.html += self.P_PATTERN % uncommit
+            self.html += self.P_PATTERN % uncommit
         # paraphrase
         for v in word['paraphrase']:
             self.html += self.P_PATTERN % (self.BLUE_PATTERN % v)
