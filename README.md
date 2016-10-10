@@ -36,9 +36,11 @@ QQ: 1085912251
     pip3 install bs4
     ```
 
-2. 运行
-    下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip (推荐)
-    或`$ git clone --depth=1 https://github.com/chestnutheng/wudao-dict` (不推荐)
+2. 下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip (体积较小)，解压
+    
+    或`$ git clone --depth=1 https://github.com/chestnutheng/wudao-dict`
+    
+    运行
     ```
     $ cd ./wudao-dict/wudao-dict
     $ sudo sh setup.sh
