@@ -48,7 +48,7 @@ QQ: 1085912251
 
     看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
 
-**PS:如果您不想看到例句, 请在`/usr/bin/wd`中的`./wdd`后面加上-s参数.**
+**PS:即使无道词典已经完全兼容了python2, 但是还是建议使用python3以上的版本.**
 
 ### Windows
 
@@ -62,7 +62,7 @@ QQ: 1085912251
 ```
 $ wd -h
 Usage: wd [OPTION]... [WORD]
-Youdao is wudao, An powerful dict.
+Youdao is wudao, A powerful dict.
 -k, --kill                   kill the server process
 -h, --help                   display this help and exit
 -s, --short-desc             show description without the sentence
@@ -81,3 +81,4 @@ Youdao is wudao, An powerful dict.
 -o                            在线查询
 ```
 
+**PS:如果您不想看到例句, 请在`/usr/bin/wd`中的`./wdd`后面加上-s参数.**
