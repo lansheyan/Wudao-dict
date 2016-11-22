@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import socket
 import sys
 
@@ -16,7 +18,10 @@ class WudaoServer:
         except OSError as e:
             print('OSError: Port has been used.')
             exit(0)
-        self.server.listen()
+        if sys.version_info.major == 2:
+            self.server.listen(0)
+        else:
+            self.server.listen()
         print('Server on...')
 
     def run(self):

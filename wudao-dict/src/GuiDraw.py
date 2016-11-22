@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 class GuiDraw:
     P_PATTERN = '<p>%s</p>'

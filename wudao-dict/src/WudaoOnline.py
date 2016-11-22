@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import bs4
 from .soupselect import select as ss
 from urllib.request import urlopen

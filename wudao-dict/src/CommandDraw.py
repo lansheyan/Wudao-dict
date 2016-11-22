@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+
 
 class CommandDraw:
     RED_PATTERN = '\033[31m%s\033[0m'

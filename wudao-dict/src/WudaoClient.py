@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import socket
 import time
 
@@ -36,4 +38,5 @@ class WudaoClient:
         return server_context
 
     def close(self):
-        self.client.sendall('---shutdown keyword---'.encode('utf-8'))
+        if self.client:
+            self.client.sendall('---shutdown keyword---'.encode('utf-8'))
