@@ -15,13 +15,10 @@ class WudaoServer:
         # Singleton
         try:
             self.server.bind(("0.0.0.0", 2376))
-        except OSError as e:
+        except OSError:
             print('OSError: Port has been used.')
             exit(0)
-        if sys.version_info.major == 2:
-            self.server.listen(0)
-        else:
-            self.server.listen()
+        self.server.listen(0)
         print('Server on...')
 
     def run(self):
