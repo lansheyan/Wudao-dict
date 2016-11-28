@@ -38,7 +38,7 @@ QQ: 1085912251
 
 2. 下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip (体积较小)，解压
     
-    或`$ git clone --depth=1 https://github.com/chestnutheng/wudao-dict`
+    (或`$ git clone --depth=1 https://github.com/chestnutheng/wudao-dict`)
     
     运行
     ```
