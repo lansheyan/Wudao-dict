@@ -83,6 +83,7 @@ Youdao is wudao, A powerful dict.
 
 ## 小贴士
 
+0. ./wd_monofile 是本词典的在线查询的单文件版本, 可以复制到`/usr/bin`下直接使用.(需要安装bs4)
 1. 如果您不想看到例句, 请在`/usr/bin/wd`中的`./wdd`后面加上-s参数.
 2. 有的用户反馈字体颜色看不清的问题, 你可以找到./wudao-dict/wudao-dict/src/CommandDraw.py, 可以看到释义,读音等采用的颜色, 直接修改即可.
 3. 查询词组直接键入类似`wd take off`即可. 如果没有结果, 请使用-o查询.

@@ -31,7 +31,9 @@ class CommandDraw:
         if word['pattern']:
             print(self.RED_PATTERN % word['pattern'].strip())
         # sentence
-        if conf:
+        if not conf:
+            print('')
+        else:
             count = 1
             if word['sentence']:
                 print('')
