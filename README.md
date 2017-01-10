@@ -33,7 +33,7 @@ QQ: 1085912251
     ```
     sudo apt-get install python3
     sudo apt-get install python3-pip
-    pip3 install bs4
+    sudo pip3 install bs4
     ```
 
 2. 下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip (体积较小)，解压
