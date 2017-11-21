@@ -265,7 +265,11 @@ def get_text(word):
         for node in p.children:
             if isinstance(node, str):
                 desc += node
-            if isinstance(node, bs4.Tag) and node.name.lower() == "span":
+            elif isinstance(node, bs4.Tag) and node.name.lower() == "b" and node.children:
+                for x in node.children:
+                    if isinstance(x, str):
+                        desc += x
+            elif isinstance(node, bs4.Tag) and node.name.lower() == "span":
                 cx = node.text
         desc = multi_space_to_single(desc.strip())
 
